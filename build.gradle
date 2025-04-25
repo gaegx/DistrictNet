@@ -1,0 +1,9 @@
+plugins {
+    id 'base' // или можно вообще без плагинов
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
