@@ -1,3 +1,32 @@
 {
-    "java.configuration.updateBuildConfiguration": "automatic"
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.format.enabled": true,
+  "java.completion.enabled": true,
+  "java.imports.gradle.enabled": true,
+  "java.imports.maven.enabled": false,
+  "java.referencesCodeLens.enabled": true,
+  "java.implementationsCodeLens.enabled": true,
+  "java.project.importOnFirstTimeStartup": "automatic",
+  "java.compile.nullAnalysis.mode": "automatic",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "redhat.java",
+  "java.debug.settings.hotCodeReplace": "auto",
+  "java.jdt.ls.java.home": "/usr/lib/jvm/java-17-openjdk",
+  "java.errors.incompleteClasspath.severity": "warning",
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  },
+  "terminal.integrated.fontFamily": "JetBrainsMonoNL Nerd Font Propo",
+  "editor.fontFamily": "JetBrains Mono",
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.fontLigatures": true,
+  "editor.fontLigatures": true,
+ 
 }

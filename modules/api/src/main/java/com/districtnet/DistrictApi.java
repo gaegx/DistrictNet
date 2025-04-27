@@ -1,11 +1,11 @@
-package com.api;
-
+package com.districtnet;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ApiApplication {
+public class DistrictApi {
     public static void main(String[] args) {
-        SpringApplication.run(ApiApplication.class, args);
+        SpringApplication.run(DistrictApi.class, args);
     }
 }
+
