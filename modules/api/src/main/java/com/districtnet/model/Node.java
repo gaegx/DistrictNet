@@ -19,7 +19,7 @@ public class Node {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="mode_id",nullable = false,unique = true)
+    @Column(name="node_id",nullable = false,unique = true)
     private Long nodeId;
 
     @Column(name="hostname",nullable = false)
