@@ -26,7 +26,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebMvcTest(NodeController.class)
-@ExtendWith(SpringExtension.class) 
 class NodeControllerTest {
 
     @Autowired
