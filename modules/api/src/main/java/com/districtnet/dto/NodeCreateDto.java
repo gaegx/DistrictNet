@@ -2,11 +2,10 @@ package com.districtnet.dto;
 
 
 import java.util.Set;
-import jakarta.annotation.sql.DataSourceDefinition;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-
+import lombok.Data;
 
 
 @Data
@@ -27,12 +26,6 @@ public class NodeCreateDto {
 
     private String description;
     private Set<String> tags;
-
-
-    
-
-
-    
 
     
 }
