@@ -1,7 +1,17 @@
 # Ignore Gradle project-specific cache directory
-.gradle
-.vscode
+.gradle/
+
+# Ignore VSCode config
+.vscode/
+
 # Ignore Gradle build output directory
-build
+build/
+
+# Ignore docker-compose file if necessary
 docker-compose.yml
-modules/api/bin
+
+# Ignore compiled binaries
+modules/api/bin/
+
+# Ignore specific directory (relative path from the root)
+districtnet/query/
