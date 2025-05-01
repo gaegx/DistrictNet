@@ -10,10 +10,11 @@ import javax.sql.DataSource;
 @Configuration
 public class EnvConfig {
 
-    
     @Bean
     public Dotenv dotenv() {
-        return Dotenv.configure().load();
+        return Dotenv.configure()
+                .directory("/home/gaegxh/districtnet") // Указание пути к директории
+                .load();
     }
 
     @Bean
