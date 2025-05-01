@@ -28,5 +28,8 @@
   "terminal.integrated.fontSize": 14,
   "terminal.integrated.fontLigatures": true,
   "editor.fontLigatures": true,
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
  
 }

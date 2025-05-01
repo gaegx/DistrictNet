@@ -12,6 +12,11 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
+    env:
+      SPRING_DATASOURCE_USERNAME: ${{ secrets.DB_USERNAME }}
+      SPRING_DATASOURCE_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/districtnet
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -22,6 +27,29 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Create .env for Docker Compose
+        run: |
+          echo "POSTGRES_USER=${{ secrets.DB_USERNAME }}" >> .env
+          echo "POSTGRES_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+          echo "POSTGRES_DB=districtnet" >> .env
+
+      - name: Create .env for Spring Boot
+        run: |
+          mkdir -p modules/api/src/main/resources
+          echo "SPRING_DATASOURCE_USERNAME=${{ secrets.DB_USERNAME }}" >> modules/api/src/main/resources/.env
+          echo "SPRING_DATASOURCE_PASSWORD=${{ secrets.DB_PASSWORD }}" >> modules/api/src/main/resources/.env
+          echo "SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/districtnet" >> modules/api/src/main/resources/.env
+
+      - name: Start services with Docker Compose
+        run: docker-compose up -d
+
+      - name: Wait for Postgres to be ready
+        run: |
+          until docker exec $(docker ps -qf "name=db") pg_isready -U ${{ secrets.DB_USERNAME }}; do
+            echo "Waiting for Postgres..."
+            sleep 2
+          done
+
       - name: Grant execute permission to Gradle wrapper
         run: chmod +x ./gradlew
 
@@ -30,3 +58,6 @@ jobs:
 
       - name: Run tests
         run: ./gradlew test
+
+      - name: Stop Docker Compose
+        run: docker-compose down

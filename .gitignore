@@ -8,10 +8,12 @@
 build/
 
 # Ignore docker-compose file if necessary
-docker-compose.yml
+
 
 # Ignore compiled binaries
 modules/api/bin/
 
 # Ignore specific directory (relative path from the root)
-districtnet/query/
+modules/api/src/main/resources/.env
+
+.env
