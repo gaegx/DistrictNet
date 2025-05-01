@@ -62,7 +62,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build project
-        run: ./gradlew build
+        run: SPRING_PROFILES_ACTIVE=ci ./gradlew build
 
       - name: Run tests
         run: ./gradlew test

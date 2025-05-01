@@ -3,17 +3,19 @@ package com.districtnet.config;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 
 @Configuration
-public class EnvConfig {
+@Profile("local") 
+public class LocalEnvConfig {
 
     @Bean
     public Dotenv dotenv() {
         return Dotenv.configure()
-                .directory("user.dir")
+                .directory("/home/gaegxh/districtnet/.env")
                 .load();
     }
 
