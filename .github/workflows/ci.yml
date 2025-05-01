@@ -27,21 +27,25 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Create .env for Docker Compose
+      - name: Install Docker
         run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+          sudo apt-get install -y docker-compose
+
+      - name: Copy .env file
+        run: |
+          echo "SPRING_DATASOURCE_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
+          echo "SPRING_DATASOURCE_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
           echo "POSTGRES_USER=${{ secrets.DB_USERNAME }}" >> .env
           echo "POSTGRES_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
           echo "POSTGRES_DB=districtnet" >> .env
 
-      - name: Create .env for Spring Boot
-        run: |
-          mkdir -p modules/api/src/main/resources
-          echo "SPRING_DATASOURCE_USERNAME=${{ secrets.DB_USERNAME }}" >> modules/api/src/main/resources/.env
-          echo "SPRING_DATASOURCE_PASSWORD=${{ secrets.DB_PASSWORD }}" >> modules/api/src/main/resources/.env
-          echo "SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/districtnet" >> modules/api/src/main/resources/.env
-
       - name: Start services with Docker Compose
-        run: docker-compose up -d
+        run: |
+          sudo docker-compose up -d
+        # если docker-compose.yml не в корне:
+        # run: docker-compose -f path/to/docker-compose.yml up -d
 
       - name: Wait for Postgres to be ready
         run: |
@@ -60,4 +64,5 @@ jobs:
         run: ./gradlew test
 
       - name: Stop Docker Compose
-        run: docker-compose down
+        run: |
+          sudo docker-compose down
