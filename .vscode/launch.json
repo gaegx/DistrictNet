@@ -4,12 +4,35 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
+        {
+            "type": "java",
+            "name": "DistrictApi",
+            "request": "launch",
+            "mainClass": "com.districtnet.DistrictApi",
+            "projectName": "api"
+        },
+        {
+            "type": "java",
+            "name": "DistrictApi",
+            "request": "launch",
+            "mainClass": "DistrictApi",
+            "projectName": "api"
+        },
         {
             "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ApiApplication<api>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.api.ApiApplication",
+            "projectName": "api",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

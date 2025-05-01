@@ -2,31 +2,33 @@ plugins {
     id 'org.springframework.boot' version '3.2.0'
     id 'io.spring.dependency-management' version '1.1.4'
     id 'java'
+    id 'jacoco' // подключаем Jacoco
 }
+
 sourceSets {
     main {
         java {
-            srcDirs = ['src']
+            srcDirs = ['src/main/java']
         }
-        resources {
-            srcDirs = ['resources']
+    }
+    test {
+        java {
+            srcDirs = ['src/test/java']
         }
     }
 }
 
-
-
-group = 'gaegxh' 
+group = 'gaegxh'
 version = '0.0.1-SNAPSHOT'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 }
-springBoot {
-    mainClass = 'com.api.ApiApplication'
-}
 
+springBoot {
+    mainClass = 'com.districtnet.DistrictApi'
+}
 
 repositories {
     mavenCentral()
@@ -37,5 +39,45 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.postgresql:postgresql:42.7.2'
+    implementation 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+        showCauses true
+        showExceptions true
+        showStackTraces true
+    }
+
+    finalizedBy jacocoTestReport // генерировать отчёт после тестов
+}
+
+jacoco {
+    toolVersion = "0.8.10"
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required.set(true)
+        csv.required.set(false)
+        html.required.set(true) // HTML-отчёт
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.80 // минимум 80% покрытия
+            }
+        }
+    }
 }
