@@ -13,7 +13,7 @@ public class EnvConfig {
     @Bean
     public Dotenv dotenv() {
         return Dotenv.configure()
-                .directory("/home/gaegxh/districtnet") // Указание пути к директории
+                .directory("user.dir")
                 .load();
     }
 
