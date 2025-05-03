@@ -42,7 +42,7 @@ public class NodeController {
         return ResponseEntity.noContent().build();
     }
 
-    // Дополнительно: список всех узлов, если тебе пригодится
+    
     @GetMapping
     public ResponseEntity<List<NodeViewDto>> getAllNodes() {
         var nodes = nodeService.getAll();

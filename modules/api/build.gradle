@@ -43,6 +43,7 @@ dependencies {
     implementation 'org.postgresql:postgresql:42.7.2'
     implementation 'org.projectlombok:lombok:1.18.30'
     implementation 'io.github.cdimascio:dotenv-java:2.2.0'
+    implementation 'org.springframework.kafka:spring-kafka'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -71,7 +72,7 @@ jacocoTestReport {
     reports {
         xml.required.set(true)
         csv.required.set(false)
-        html.required.set(true) // HTML-отчёт
+        html.required.set(true) 
     }
 }
 
@@ -79,7 +80,7 @@ jacocoTestCoverageVerification {
     violationRules {
         rule {
             limit {
-                minimum = 0.80 // минимум 80% покрытия
+                minimum = 0.80
             }
         }
     }
