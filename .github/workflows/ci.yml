@@ -49,15 +49,7 @@ jobs:
       - name: Start services with Docker Compose
         run: |
           sudo docker-compose up -d
-        # если docker-compose.yml не в корне:
-        # run: docker-compose -f path/to/docker-compose.yml up -d
-
-      - name: Wait for Postgres to be ready
-        run: |
-          until docker exec $(docker ps -qf "name=districtnet") pg_isready -U ${POSTGRES_USER}; do
-            echo "Waiting for Postgres..."
-            sleep 2
-          done
+      
 
       - name: Grant execute permission to Gradle wrapper
         run: chmod +x ./gradlew
