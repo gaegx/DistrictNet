@@ -1,11 +1,13 @@
-package main.java.com.districtnet.model;
+package com.districtnet.model;
+
+import jakarta.persistence.*;
 
 import java.lang.annotation.Inherited;
 
 import javax.annotation.processing.Generated;
 
 @Entity
-@Table("name=task")
+@Table(name="task")
 public class Task {
 
     @Id

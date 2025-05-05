@@ -15,7 +15,7 @@ public class LocalEnvConfig {
     @Bean
     public Dotenv dotenv() {
         return Dotenv.configure()
-                .directory("/home/gaegxh/districtnet/.env")
+                .directory("/home/gaegxh/IdeaProjects/DistrictNet/.env")
                 .load();
     }
 
