@@ -6,3 +6,5 @@ include 'modules:node'
 include 'modules:api'
 
 
+
+include 'modules:ssh-agent'
