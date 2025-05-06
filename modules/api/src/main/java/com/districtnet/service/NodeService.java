@@ -39,9 +39,11 @@ public class NodeService {
 
     @Transactional
     public NodeDisplayDto create(NodeCreateDto dto) {
-        if (nodeRepository.existsById(dto.getNodeId())) {
-            throw new RuntimeException("Node with id already exists: " + dto.getNodeId());
+        Node existingNode = nodeRepository.findByHostname(dto.getHostname()).orElse(null);
+        if (existingNode != null) {
+            throw new RuntimeException("Node with hostname already exists: " + dto.getHostname());
         }
+
 
         Node node = nodeMapper.toEntity(dto);
         nodeRepository.save(node);

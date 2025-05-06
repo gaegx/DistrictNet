@@ -1,14 +1,7 @@
 package com.districtnet.model;
 
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
+import com.districtnet.Enum.Auth_type;
+import jakarta.persistence.*;
 
 import java.time.Instant;
 import java.util.Set;
@@ -19,11 +12,21 @@ public class Node {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="node_id",nullable = false,unique = true)
+    @Column(name="node_id")
     private Long nodeId;
 
-    @Column(name="hostname",nullable = false)
+    @Column(name="hostname",nullable = false, unique = true)
     private String hostname;
+
+    @Column(name="user_name",nullable = false)
+    private String userName;
+
+    @Column(name="type_auth",nullable = false)
+    @Enumerated(EnumType.ORDINAL)
+    private Auth_type typeAuth;
+
+    @Column(name="auth_key",nullable = false)
+    private String authKey;
 
     @Column(name = "ip_address",nullable = false)
     private String ipAddress;
@@ -36,11 +39,11 @@ public class Node {
 
     @ElementCollection
     @CollectionTable(
-        name = "node_tags",
+        name = "node_res",
         joinColumns = @JoinColumn(name="node_id")
     )
-    @Column(name = "tag")
-    private Set <String> tags;
+    @Column(name = "res")
+    private Set <String> resources;
 
     @Column(name = "regesteredAt",nullable = false)
     private Instant registeredAt;
@@ -56,7 +59,7 @@ public class Node {
         this.ipAddress = ipAddress;
         this.os = os;
         this.description = description;
-        this.tags = tags;
+        this.resources = tags;
         this.registeredAt = Instant.now();
         this.lastSeenAt = Instant.now();
     }
@@ -102,11 +105,11 @@ public class Node {
     }
 
     public Set<String> getTags() {
-        return tags;
+        return resources;
     }
 
     public void setTags(Set<String> tags) {
-        this.tags = tags;
+        this.resources = tags;
     }
 
     public Instant getRegisteredAt() {
@@ -124,5 +127,12 @@ public class Node {
     public void setLastSeenAt(Instant lastSeenAt) {
         this.lastSeenAt = lastSeenAt;
     }
+    public String getUserName() {return userName;}
+    public void setUserName(String userName) {this.userName = userName;}
+    public Auth_type getTypeAuth() {return typeAuth;}
+    public void setTypeAuth(Auth_type typeAuth) {this.typeAuth = typeAuth;}
+    public String getAuthKey() {return authKey;}
+    public void setAuthKey(String authKey) {this.authKey = authKey;}
+
     
 }
