@@ -103,15 +103,6 @@ public class Node {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public Set<String> getTags() {
-        return resources;
-    }
-
-    public void setTags(Set<String> tags) {
-        this.resources = tags;
-    }
-
     public Instant getRegisteredAt() {
         return registeredAt;
     }
@@ -133,6 +124,8 @@ public class Node {
     public void setTypeAuth(Auth_type typeAuth) {this.typeAuth = typeAuth;}
     public String getAuthKey() {return authKey;}
     public void setAuthKey(String authKey) {this.authKey = authKey;}
+    public void setResources(Set<String> resources) {this.resources = resources;}
+    public Set<String> getResources() {return resources;}
 
-    
+
 }

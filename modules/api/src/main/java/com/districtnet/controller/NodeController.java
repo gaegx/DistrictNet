@@ -17,11 +17,11 @@ import java.util.List;
 public class NodeController {
 
     private final NodeService nodeService;
-    private final NodeMapper nodeMapper;
+
 
     public NodeController(NodeService nodeService, NodeMapper nodeMapper) {
         this.nodeService = nodeService;
-        this.nodeMapper = nodeMapper;
+
     }
 
     @PostMapping
