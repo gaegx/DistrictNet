@@ -57,7 +57,7 @@ public class NodeMapper {
         node.setIpAddress(nodeCreateDto.getIpAddress());
         node.setOs(nodeCreateDto.getOs());
         node.setDescription(nodeCreateDto.getDescription());
-        node.setResources(nodeCreateDto.getTags());
+        node.setResources(nodeCreateDto.getRes());
         node.setRegisteredAt(java.time.Instant.now());
         node.setLastSeenAt(java.time.Instant.now());
         node.setUserName(nodeCreateDto.getUserName());

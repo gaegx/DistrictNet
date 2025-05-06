@@ -26,7 +26,7 @@ public class NodeCreateDto {
 
     private String description;
 
-    private Set<String> tags;
+    private Set<String> res;
 
     @NotBlank
     @Size(min = 4, max = 255)

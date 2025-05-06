@@ -95,17 +95,23 @@ class NodeServiceTest {
 
     @Test
     void testCreate_AlreadyExists() {
+
         NodeCreateDto createDto = new NodeCreateDto();
         createDto.setNodeId(10L);
+        createDto.setHostname("hostname");
 
-        when(nodeRepository.existsById(10L)).thenReturn(true);
+
+        Node existingNode = new Node();
+        existingNode.setHostname("hostname");
+
+        when(nodeRepository.findByHostname("hostname")).thenReturn(Optional.of(existingNode));
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             nodeService.create(createDto);
         });
-
         assertTrue(exception.getMessage().contains("already exists"));
     }
+
 
     @Test
     void testDelete_Success() {

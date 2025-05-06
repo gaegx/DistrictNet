@@ -19,7 +19,7 @@ public class NodeController {
     private final NodeService nodeService;
 
 
-    public NodeController(NodeService nodeService, NodeMapper nodeMapper) {
+    public NodeController(NodeService nodeService) {
         this.nodeService = nodeService;
 
     }
@@ -35,6 +35,8 @@ public class NodeController {
         var node = nodeService.getById(id);
         return ResponseEntity.ok(node);
     }
+
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteNode(@PathVariable Long id) {

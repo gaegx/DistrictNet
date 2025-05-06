@@ -26,6 +26,9 @@
       <module name="districtnet.modules.node" options="-parameters" />
       <module name="districtnet.modules.node.main" options="-parameters" />
       <module name="districtnet.modules.node.test" options="-parameters" />
+      <module name="ssh_agent" options="-parameters" />
+      <module name="ssh_agent.main" options="-parameters" />
+      <module name="ssh_agent.test" options="-parameters" />
     </option>
   </component>
 </project>

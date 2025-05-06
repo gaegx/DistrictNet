@@ -1,5 +1,6 @@
 package com.districtnet.controller;
 
+import com.districtnet.Enum.Auth_type;
 import com.districtnet.dto.NodeCreateDto;
 import com.districtnet.dto.NodeDisplayDto;
 import com.districtnet.dto.NodeViewDto;
@@ -47,10 +48,14 @@ class NodeControllerTest {
         input.setHostname("node1");
         input.setIpAddress("192.168.0.1");
         input.setOs("Linux");
-        input.setTags(Set.of("web", "db"));
+        input.setRes(Set.of("web", "db"));
+        input.setTypeAuth(Auth_type.PASSWORD);
+        input.setUserName("admin");
+        input.setAuthKey("secret1");
+
 
         NodeDisplayDto result = new NodeDisplayDto();
-        result.setNodeId("1");
+        result.setNodeId(1L);
         result.setHostname("node1");
         result.setIpAddress("192.168.0.1");
         result.setOs("Linux");
@@ -71,7 +76,7 @@ class NodeControllerTest {
     @Test
     void testGetNodeById() throws Exception {
         NodeDisplayDto node = new NodeDisplayDto();
-        node.setNodeId("1");
+        node.setNodeId(1L);
         node.setHostname("node1");
         node.setIpAddress("192.168.0.1");
         node.setOs("Linux");
@@ -83,7 +88,8 @@ class NodeControllerTest {
 
         mockMvc.perform(get("/api/v1/nodes/1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.hostname").value("node1"));
+                .andExpect(jsonPath("$.hostname").value("node1"))
+                .andExpect(jsonPath("$.ipAddress").value("192.168.0.1"));
     }
 
     @Test
@@ -105,7 +111,8 @@ class NodeControllerTest {
 
         mockMvc.perform(get("/api/v1/nodes"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(1))
-                .andExpect(jsonPath("$[0].hostname").value("node1"));
+                .andExpect(jsonPath("$").isArray()) // Проверка, что возвращается массив
+                .andExpect(jsonPath("$.length()").value(1)) // Проверка длины массива
+                .andExpect(jsonPath("$[0].hostname").value("node1")); // Проверка значения первого элемента
     }
 }
