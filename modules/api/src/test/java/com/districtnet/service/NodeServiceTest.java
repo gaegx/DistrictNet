@@ -22,13 +22,16 @@ class NodeServiceTest {
     private NodeRepository nodeRepository;
     private NodeMapper nodeMapper;
     private NodeService nodeService;
+    private KafkaSender kafkaSender;
 
     @BeforeEach
     void setUp() {
         nodeRepository = mock(NodeRepository.class);
         nodeMapper = mock(NodeMapper.class);
-        nodeService = new NodeService(nodeRepository, nodeMapper);
+        kafkaSender = mock(KafkaSender.class);
+        nodeService = new NodeService(nodeRepository, nodeMapper,kafkaSender);
     }
+
 
     @Test
     void testGetById_Found() {
@@ -80,16 +83,19 @@ class NodeServiceTest {
     void testCreate_Success() {
         NodeCreateDto createDto = new NodeCreateDto();
         createDto.setNodeId(10L);
+        createDto.setHostname("host");
+
         Node node = new Node();
         NodeDisplayDto dto = new NodeDisplayDto();
 
-        when(nodeRepository.existsById(10L)).thenReturn(false);
+        when(nodeRepository.findByHostname("host")).thenReturn(Optional.empty());
         when(nodeMapper.toEntity(createDto)).thenReturn(node);
         when(nodeMapper.toDisplayDto(node)).thenReturn(dto);
 
         NodeDisplayDto result = nodeService.create(createDto);
 
         verify(nodeRepository).save(node);
+        verify(kafkaSender).send(createDto); // ← важно!
         assertEquals(dto, result);
     }
 

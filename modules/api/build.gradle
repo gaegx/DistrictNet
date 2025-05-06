@@ -61,7 +61,7 @@ test {
         showStackTraces true
     }
 
-    finalizedBy jacocoTestReport // генерировать отчёт после тестов
+    finalizedBy jacocoTestReport
 }
 
 jacoco {

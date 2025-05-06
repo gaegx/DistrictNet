@@ -13,7 +13,7 @@ public class NodeDisplayDto {
     private String ipAddress;
     private String os;
     private String description;
-    private Set<String> tags;
+    private Set<String> resource;
     private Instant registeredAt;
     private Instant lastSeen;
 

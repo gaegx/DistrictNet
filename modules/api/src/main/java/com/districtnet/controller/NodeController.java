@@ -26,6 +26,7 @@ public class NodeController {
 
     @PostMapping
     public ResponseEntity<NodeDisplayDto> createNode(@Valid @RequestBody NodeCreateDto dto) {
+        System.out.println(dto.toString());
         var saved = nodeService.create(dto);
         return ResponseEntity.ok(saved);
     }

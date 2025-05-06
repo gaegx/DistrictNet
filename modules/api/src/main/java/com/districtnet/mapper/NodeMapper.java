@@ -21,7 +21,7 @@ public class NodeMapper {
         dto.setIpAddress(node.getIpAddress());
         dto.setOs(node.getOs());
         dto.setDescription(node.getDescription());
-        dto.setTags(node.getResources());
+        dto.setResource(node.getResources());
         dto.setRegisteredAt(node.getRegisteredAt());
         dto.setLastSeen(node.getLastSeenAt());
 
@@ -57,7 +57,7 @@ public class NodeMapper {
         node.setIpAddress(nodeCreateDto.getIpAddress());
         node.setOs(nodeCreateDto.getOs());
         node.setDescription(nodeCreateDto.getDescription());
-        node.setResources(nodeCreateDto.getRes());
+        node.setResources(nodeCreateDto.getResource());
         node.setRegisteredAt(java.time.Instant.now());
         node.setLastSeenAt(java.time.Instant.now());
         node.setUserName(nodeCreateDto.getUserName());
