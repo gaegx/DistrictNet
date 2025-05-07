@@ -2,7 +2,7 @@ plugins {
     id 'org.springframework.boot' version '3.2.0'
     id 'io.spring.dependency-management' version '1.1.4'
     id 'java'
-    id 'jacoco' // подключаем Jacoco
+    id 'jacoco'
 }
 
 sourceSets {
@@ -31,8 +31,10 @@ springBoot {
 }
 
 repositories {
-    mavenCentral()
+    mavenCentral()  // основной репозиторий
+       // дополнительный репозиторий
 }
+
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -40,6 +42,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.postgresql:postgresql:42.7.2'
     implementation 'org.projectlombok:lombok:1.18.30'
+    implementation 'io.github.cdimascio:dotenv-java:2.2.0'
+    implementation 'org.springframework.kafka:spring-kafka'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -56,7 +61,7 @@ test {
         showStackTraces true
     }
 
-    finalizedBy jacocoTestReport // генерировать отчёт после тестов
+    finalizedBy jacocoTestReport
 }
 
 jacoco {
@@ -68,7 +73,7 @@ jacocoTestReport {
     reports {
         xml.required.set(true)
         csv.required.set(false)
-        html.required.set(true) // HTML-отчёт
+        html.required.set(true) 
     }
 }
 
@@ -76,7 +81,7 @@ jacocoTestCoverageVerification {
     violationRules {
         rule {
             limit {
-                minimum = 0.80 // минимум 80% покрытия
+                minimum = 0.80
             }
         }
     }

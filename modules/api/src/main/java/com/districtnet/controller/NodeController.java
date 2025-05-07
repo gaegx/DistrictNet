@@ -17,15 +17,16 @@ import java.util.List;
 public class NodeController {
 
     private final NodeService nodeService;
-    private final NodeMapper nodeMapper;
 
-    public NodeController(NodeService nodeService, NodeMapper nodeMapper) {
+
+    public NodeController(NodeService nodeService) {
         this.nodeService = nodeService;
-        this.nodeMapper = nodeMapper;
+
     }
 
     @PostMapping
     public ResponseEntity<NodeDisplayDto> createNode(@Valid @RequestBody NodeCreateDto dto) {
+        System.out.println(dto.toString());
         var saved = nodeService.create(dto);
         return ResponseEntity.ok(saved);
     }
@@ -36,13 +37,15 @@ public class NodeController {
         return ResponseEntity.ok(node);
     }
 
+
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteNode(@PathVariable Long id) {
         nodeService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
-    // Дополнительно: список всех узлов, если тебе пригодится
+    
     @GetMapping
     public ResponseEntity<List<NodeViewDto>> getAllNodes() {
         var nodes = nodeService.getAll();

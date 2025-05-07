@@ -8,6 +8,7 @@ import com.districtnet.model.Node;
 import com.districtnet.repository.NodeRepository;
 import jakarta.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,10 +19,14 @@ public class NodeService {
     
     private final NodeRepository nodeRepository;
     private final NodeMapper nodeMapper;
+    @Autowired
+    private  KafkaSender kafkaSender;
 
-    public NodeService(NodeRepository nodeRepository, NodeMapper nodeMapper) {
+    public NodeService(NodeRepository nodeRepository, NodeMapper nodeMapper, KafkaSender kafkaSender) {
         this.nodeRepository = nodeRepository;
         this.nodeMapper = nodeMapper;
+        this.kafkaSender = kafkaSender;
+
     }
 
     public NodeDisplayDto getById(Long id) {
@@ -39,12 +44,16 @@ public class NodeService {
 
     @Transactional
     public NodeDisplayDto create(NodeCreateDto dto) {
-        if (nodeRepository.existsById(dto.getNodeId())) {
-            throw new RuntimeException("Node with id already exists: " + dto.getNodeId());
+        Node existingNode = nodeRepository.findByHostname(dto.getHostname()).orElse(null);
+        if (existingNode != null) {
+            throw new RuntimeException("Node with hostname already exists: " + dto.getHostname());
         }
+
 
         Node node = nodeMapper.toEntity(dto);
         nodeRepository.save(node);
+        kafkaSender.send(dto);
+
         return nodeMapper.toDisplayDto(node);
     }
 
