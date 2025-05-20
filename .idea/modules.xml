@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/api/districtnet.modules.api.main.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/api/districtnet.modules.api.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/ssh-agent/districtnet.modules.ssh-agent.main.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/ssh-agent/districtnet.modules.ssh-agent.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/ssh-agent/districtnet.modules.ssh-agent.test.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/ssh-agent/districtnet.modules.ssh-agent.test.iml" />
+    </modules>
+  </component>
+</project>

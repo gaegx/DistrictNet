@@ -48,12 +48,9 @@ public class NodeService {
         if (existingNode != null) {
             throw new RuntimeException("Node with hostname already exists: " + dto.getHostname());
         }
-
-
         Node node = nodeMapper.toEntity(dto);
         nodeRepository.save(node);
         kafkaSender.send(dto);
-
         return nodeMapper.toDisplayDto(node);
     }
 
