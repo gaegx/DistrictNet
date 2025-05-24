@@ -1,10 +1,9 @@
 package com.districtnet.controller;
 
-import com.districtnet.dto.NodeCreateDto;
-import com.districtnet.dto.NodeDisplayDto;
-import com.districtnet.dto.NodeViewDto;
+import com.districtnet.dto.node.NodeCreateDto;
+import com.districtnet.dto.node.NodeDisplayDto;
+import com.districtnet.dto.node.NodeViewDto;
 import com.districtnet.service.NodeService;
-import com.districtnet.mapper.NodeMapper;
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +20,6 @@ public class NodeController {
 
     public NodeController(NodeService nodeService) {
         this.nodeService = nodeService;
-
     }
 
     @PostMapping
@@ -36,7 +34,6 @@ public class NodeController {
         var node = nodeService.getById(id);
         return ResponseEntity.ok(node);
     }
-
 
 
     @DeleteMapping("/{id}")

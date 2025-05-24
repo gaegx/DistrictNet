@@ -1,4 +1,4 @@
-package com.districtnet.model;
+package com.districtnet.entity;
 
 import com.districtnet.Enum.Auth_type;
 import jakarta.persistence.*;

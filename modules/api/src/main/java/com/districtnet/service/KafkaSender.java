@@ -1,6 +1,6 @@
 package com.districtnet.service;
 
-import com.districtnet.dto.NodeCreateDto;
+import com.districtnet.dto.node.NodeCreateDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;

@@ -1,10 +1,10 @@
 package com.districtnet.service;
 
-import com.districtnet.dto.NodeCreateDto;
-import com.districtnet.dto.NodeDisplayDto;
-import com.districtnet.dto.NodeViewDto;
+import com.districtnet.dto.node.NodeCreateDto;
+import com.districtnet.dto.node.NodeDisplayDto;
+import com.districtnet.dto.node.NodeViewDto;
 import com.districtnet.mapper.NodeMapper;
-import com.districtnet.model.Node;
+import com.districtnet.entity.Node;
 import com.districtnet.repository.NodeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
