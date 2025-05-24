@@ -1,7 +1,5 @@
 package com.districtnet.mapper;
 
-package com.districtnet.mapper;
-
 import com.districtnet.dto.task.TaskCreateDto;
 import com.districtnet.dto.task.TaskDisplayDto;
 import com.districtnet.entity.Task;
@@ -20,7 +18,7 @@ public class TaskMapper {
         task.setDockerPath(dto.getDockerPath());
         task.setReplicas(dto.getReplicas());
         task.setParameters(dto.getParameters());
-        task.setStatus(TaskStatus.PENDING); // Устанавливаем статус по умолчанию
+        task.setStatus(TaskStatus.PENDING);
         return task;
     }
 
@@ -39,5 +37,18 @@ public class TaskMapper {
         dto.setParameters(task.getParameters());
         dto.setCreatedAt(task.getCreatedAt());
         return dto;
+    }
+
+    public static Task updateEntity(Task task, TaskCreateDto dto) {
+        task.setTaskType(dto.getTaskType());
+        task.setName(dto.getName());
+        task.setDescription(dto.getDescription());
+        task.setCommand(dto.getCommand());
+        task.setDataPath(dto.getDataPath());
+        task.setScriptUrl(dto.getScriptUrl());
+        task.setDockerPath(dto.getDockerPath());
+        task.setReplicas(dto.getReplicas());
+        task.setParameters(dto.getParameters());
+        return task;
     }
 }

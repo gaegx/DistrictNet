@@ -3,10 +3,14 @@ package com.districtnet.entity;
 import com.districtnet.Enum.TaskType;
 import com.districtnet.Enum.TaskStatus;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Data
 @Table(name = "task")
 public class Task {
 
