@@ -23,9 +23,6 @@
       <module name="districtnet.modules.cli" options="-parameters" />
       <module name="districtnet.modules.cli.main" options="-parameters" />
       <module name="districtnet.modules.cli.test" options="-parameters" />
-      <module name="districtnet.modules.core" options="-parameters" />
-      <module name="districtnet.modules.core.main" options="-parameters" />
-      <module name="districtnet.modules.core.test" options="-parameters" />
       <module name="districtnet.modules.node" options="-parameters" />
       <module name="districtnet.modules.node.main" options="-parameters" />
       <module name="districtnet.modules.node.test" options="-parameters" />
