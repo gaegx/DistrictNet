@@ -1,4 +1,4 @@
-package com.districtnet.dto;
+package com.districtnet.dto.node;
 
 import lombok.Data;
 

@@ -1,6 +1,5 @@
-package com.districtnet.dto;
+package com.districtnet.dto.node;
 
-import com.districtnet.Enum.Auth_type;
 import lombok.Data;
 
 import java.time.Instant;

@@ -1,9 +1,9 @@
 package com.districtnet.mapper;
 
-import com.districtnet.dto.NodeCreateDto;
-import com.districtnet.dto.NodeDisplayDto;
-import com.districtnet.dto.NodeViewDto;
-import com.districtnet.model.Node;
+import com.districtnet.dto.node.NodeCreateDto;
+import com.districtnet.dto.node.NodeDisplayDto;
+import com.districtnet.dto.node.NodeViewDto;
+import com.districtnet.entity.Node;
 import org.springframework.stereotype.Component;
 
 @Component
