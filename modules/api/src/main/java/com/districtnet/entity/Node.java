@@ -9,7 +9,7 @@ import java.util.Set;
 @Entity
 @Table(name = "node")
 public class Node {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="node_id")
@@ -39,11 +39,14 @@ public class Node {
 
     @ElementCollection
     @CollectionTable(
-        name = "node_res",
-        joinColumns = @JoinColumn(name="node_id")
+            name = "node_res",
+            joinColumns = @JoinColumn(name="node_id")
     )
     @Column(name = "res")
-    private Set <String> resources;
+    private Set<String> resources;
+
+    @OneToOne(mappedBy = "node", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private NodeResourceInfo resourceInfo;
 
     @Column(name = "regesteredAt",nullable = false)
     private Instant registeredAt;
@@ -103,6 +106,7 @@ public class Node {
     public void setDescription(String description) {
         this.description = description;
     }
+
     public Instant getRegisteredAt() {
         return registeredAt;
     }
@@ -118,14 +122,47 @@ public class Node {
     public void setLastSeenAt(Instant lastSeenAt) {
         this.lastSeenAt = lastSeenAt;
     }
-    public String getUserName() {return userName;}
-    public void setUserName(String userName) {this.userName = userName;}
-    public Auth_type getTypeAuth() {return typeAuth;}
-    public void setTypeAuth(Auth_type typeAuth) {this.typeAuth = typeAuth;}
-    public String getAuthKey() {return authKey;}
-    public void setAuthKey(String authKey) {this.authKey = authKey;}
-    public void setResources(Set<String> resources) {this.resources = resources;}
-    public Set<String> getResources() {return resources;}
 
+    public String getUserName() {
+        return userName;
+    }
 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public Auth_type getTypeAuth() {
+        return typeAuth;
+    }
+
+    public void setTypeAuth(Auth_type typeAuth) {
+        this.typeAuth = typeAuth;
+    }
+
+    public String getAuthKey() {
+        return authKey;
+    }
+
+    public void setAuthKey(String authKey) {
+        this.authKey = authKey;
+    }
+
+    public Set<String> getResources() {
+        return resources;
+    }
+
+    public void setResources(Set<String> resources) {
+        this.resources = resources;
+    }
+
+    public NodeResourceInfo getResourceInfo() {
+        return resourceInfo;
+    }
+
+    public void setResourceInfo(NodeResourceInfo resourceInfo) {
+        this.resourceInfo = resourceInfo;
+        if (resourceInfo != null) {
+            resourceInfo.setNode(this);
+        }
+    }
 }
