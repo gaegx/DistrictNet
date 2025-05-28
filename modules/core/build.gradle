@@ -1,6 +1,8 @@
 plugins {
+    id 'org.springframework.boot' version '3.2.0'
+    id 'io.spring.dependency-management' version '1.1.4'
     id 'java'
-    id 'application'
+    id 'jacoco'
 }
 
 group = 'gaegxh.client'
@@ -11,8 +13,21 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-application {
-    mainClass = 'com.api.client.TerminalClient'
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
+    }
+}
+
+springBoot {
+    mainClass = 'com.districtnet.CoreApplication'
 }
 
 repositories {
@@ -21,25 +36,18 @@ repositories {
 
 dependencies {
 
-    implementation 'com.googlecode.lanterna:lanterna:3.1.1'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.postgresql:postgresql:42.7.2'
+    implementation 'org.projectlombok:lombok:1.18.30'
+    implementation 'io.github.cdimascio:dotenv-java:2.2.0'
+    implementation 'org.springframework.kafka:spring-kafka'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
 
-
-    implementation 'org.springframework:spring-web:6.0.11'
-
-    // Jackson для обработки JSON (если сервер возвращает JSON)
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
-
-    // Тестовые зависимости
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.3'
 }
 
-sourceSets {
-    main {
-        java {
-            srcDirs = ['src']
-        }
-    }
-}
 
 tasks.named('test') {
     useJUnitPlatform()

@@ -15,5 +15,7 @@ public class NodeDisplayDto {
     private Set<String> resource;
     private Instant registeredAt;
     private Instant lastSeen;
-
+    private Float cpu;
+    private Float ram;
+    private Float disk;
 }

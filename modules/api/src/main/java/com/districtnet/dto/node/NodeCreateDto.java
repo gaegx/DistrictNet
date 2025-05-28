@@ -1,9 +1,7 @@
 package com.districtnet.dto.node;
 
 import com.districtnet.Enum.Auth_type;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.util.Set;
@@ -37,4 +35,12 @@ public class NodeCreateDto {
 
     private Auth_type typeAuth;
 
+    @PositiveOrZero(message = "CPU must be 0 or positive")
+    private Float cpu;
+
+    @PositiveOrZero(message = "RAM must be 0 or positive")
+    private Float ram;
+
+    @PositiveOrZero(message = "Disk must be 0 or positive")
+    private Float disk;
 }
