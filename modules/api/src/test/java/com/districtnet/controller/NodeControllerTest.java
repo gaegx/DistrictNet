@@ -1,9 +1,9 @@
 package com.districtnet.controller;
 
 import com.districtnet.Enum.Auth_type;
-import com.districtnet.dto.NodeCreateDto;
-import com.districtnet.dto.NodeDisplayDto;
-import com.districtnet.dto.NodeViewDto;
+import com.districtnet.dto.node.NodeCreateDto;
+import com.districtnet.dto.node.NodeDisplayDto;
+import com.districtnet.dto.node.NodeViewDto;
 import com.districtnet.service.NodeService;
 import com.districtnet.mapper.NodeMapper;
 

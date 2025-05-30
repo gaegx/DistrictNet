@@ -1,6 +1,6 @@
 package com.districtnet.config;
 
-import com.districtnet.model.NodeCreateDto;
+import com.districtnet.entity.NodeCreateDto;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.springframework.beans.factory.annotation.Value;

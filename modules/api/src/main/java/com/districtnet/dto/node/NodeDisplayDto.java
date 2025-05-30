@@ -1,6 +1,5 @@
-package com.districtnet.dto;
+package com.districtnet.dto.node;
 
-import com.districtnet.Enum.Auth_type;
 import lombok.Data;
 
 import java.time.Instant;
@@ -16,5 +15,7 @@ public class NodeDisplayDto {
     private Set<String> resource;
     private Instant registeredAt;
     private Instant lastSeen;
-
+    private Float cpu;
+    private Float ram;
+    private Float disk;
 }

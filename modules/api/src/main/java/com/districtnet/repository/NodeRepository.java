@@ -1,7 +1,7 @@
 package com.districtnet.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.districtnet.model.Node;
+import com.districtnet.entity.Node;
 
 import java.util.Optional;
 
