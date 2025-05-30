@@ -63,6 +63,6 @@ public class ContexService {
 
     @Scheduled(fixedRate = 60000)
     public void cleanupInactiveNodes() {
-        removeInactiveNodes(120); // 2 минуты
+        removeInactiveNodes(60);
     }
 }

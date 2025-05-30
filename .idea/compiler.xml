@@ -3,16 +3,6 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
-      <profile name="Gradle Imported" enabled="true">
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.30/f195ee86e6c896ea47a1d39defbe20eb59cd149d/lombok-1.18.30.jar" />
-        </processorPath>
-        <module name="districtnet.modules.api.main" />
-        <module name="districtnet.modules.ssh-agent.main" />
-        <module name="districtnet.modules.ssh-agent.test" />
-        <module name="districtnet.modules.core.main" />
-      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="17" />
   </component>
@@ -27,12 +17,14 @@
       <module name="districtnet.modules.core" options="-parameters" />
       <module name="districtnet.modules.core.main" options="-parameters" />
       <module name="districtnet.modules.core.test" options="-parameters" />
-      <module name="districtnet.modules.node" options="-parameters" />
       <module name="districtnet.modules.node.main" options="-parameters" />
       <module name="districtnet.modules.node.test" options="-parameters" />
       <module name="districtnet.modules.ssh-agent" options="-parameters" />
       <module name="districtnet.modules.ssh-agent.main" options="-parameters" />
       <module name="districtnet.modules.ssh-agent.test" options="-parameters" />
+      <module name="node.core" options="-parameters" />
+      <module name="node.core.main" options="-parameters" />
+      <module name="node.core.test" options="-parameters" />
     </option>
   </component>
 </project>
