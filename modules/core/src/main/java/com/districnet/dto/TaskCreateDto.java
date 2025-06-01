@@ -1,9 +1,10 @@
-package com.districtnet.dto.task;
+package com.districnet.dto;
 
-import com.districtnet.Enum.TaskType;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+
 @Getter
 @Setter
 public class TaskCreateDto {

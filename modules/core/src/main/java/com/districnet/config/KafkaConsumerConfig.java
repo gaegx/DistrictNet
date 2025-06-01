@@ -1,6 +1,6 @@
 package com.districnet.config;
 
-import com.districtnet.entity.NodeCreateDto;
+import com.districnet.dto.TaskCreateDto;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,8 +26,8 @@ public class KafkaConsumerConfig {
     private String groupId;
 
     @Bean
-    public ConsumerFactory<String, NodeCreateDto> consumerFactory() {
-        JsonDeserializer<NodeCreateDto> nodeCreateDtoJsonDeserializer = new JsonDeserializer<>(NodeCreateDto.class);
+    public ConsumerFactory<String, TaskCreateDto> consumerFactory() {
+        JsonDeserializer<TaskCreateDto> nodeCreateDtoJsonDeserializer = new JsonDeserializer<>(TaskCreateDto.class);
         nodeCreateDtoJsonDeserializer.setUseTypeHeaders(false);
         nodeCreateDtoJsonDeserializer.addTrustedPackages("*");
 
@@ -43,8 +43,8 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, NodeCreateDto> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, NodeCreateDto> factory =
+    public ConcurrentKafkaListenerContainerFactory<String, TaskCreateDto> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, TaskCreateDto> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;

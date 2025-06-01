@@ -1,5 +1,7 @@
 package com.districtnet.service;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -18,6 +20,7 @@ public class FtpService {
     private static final String USER = "user";
     private static final String PASSWORD = "password";
 
+    @PostConstruct
     private FTPClient connect() throws IOException {
         FTPClient ftpClient = new FTPClient();
         ftpClient.connect(HOST, PORT);
@@ -121,6 +124,7 @@ public class FtpService {
         return fileNames;
     }
 
+    @PreDestroy
     private void disconnect(FTPClient ftpClient) {
         if (ftpClient.isConnected()) {
             try {
