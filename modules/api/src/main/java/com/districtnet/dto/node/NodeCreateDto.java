@@ -24,17 +24,6 @@ public class NodeCreateDto {
 
     private String description;
 
-    private Set<String> resource;
-
-    @NotBlank
-    @Size(min = 4, max = 255)
-    private String userName;
-
-    @NotBlank
-    private String authKey;
-
-    private Auth_type typeAuth;
-
     @PositiveOrZero(message = "CPU must be 0 or positive")
     private Float cpu;
 

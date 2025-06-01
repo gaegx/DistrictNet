@@ -18,16 +18,6 @@ public class Node {
     @Column(name="hostname",nullable = false, unique = true)
     private String hostname;
 
-    @Column(name="user_name",nullable = false)
-    private String userName;
-
-    @Column(name="type_auth",nullable = false)
-    @Enumerated(EnumType.ORDINAL)
-    private Auth_type typeAuth;
-
-    @Column(name="auth_key",nullable = false)
-    private String authKey;
-
     @Column(name = "ip_address",nullable = false)
     private String ipAddress;
 
@@ -37,13 +27,6 @@ public class Node {
     @Column(name = "description")
     private String description;
 
-    @ElementCollection
-    @CollectionTable(
-            name = "node_res",
-            joinColumns = @JoinColumn(name="node_id")
-    )
-    @Column(name = "res")
-    private Set<String> resources;
 
     @OneToOne(mappedBy = "node", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private NodeResourceInfo resourceInfo;
@@ -62,7 +45,6 @@ public class Node {
         this.ipAddress = ipAddress;
         this.os = os;
         this.description = description;
-        this.resources = tags;
         this.registeredAt = Instant.now();
         this.lastSeenAt = Instant.now();
     }
@@ -122,39 +104,6 @@ public class Node {
     public void setLastSeenAt(Instant lastSeenAt) {
         this.lastSeenAt = lastSeenAt;
     }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public Auth_type getTypeAuth() {
-        return typeAuth;
-    }
-
-    public void setTypeAuth(Auth_type typeAuth) {
-        this.typeAuth = typeAuth;
-    }
-
-    public String getAuthKey() {
-        return authKey;
-    }
-
-    public void setAuthKey(String authKey) {
-        this.authKey = authKey;
-    }
-
-    public Set<String> getResources() {
-        return resources;
-    }
-
-    public void setResources(Set<String> resources) {
-        this.resources = resources;
-    }
-
     public NodeResourceInfo getResourceInfo() {
         return resourceInfo;
     }
