@@ -4,8 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/api/districtnet.modules.api.main.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/api/districtnet.modules.api.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/core/districtnet.modules.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/core/districtnet.modules.core.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/ssh-agent/districtnet.modules.ssh-agent.main.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/ssh-agent/districtnet.modules.ssh-agent.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/ssh-agent/districtnet.modules.ssh-agent.test.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/ssh-agent/districtnet.modules.ssh-agent.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/ftp/districtnet.modules.ftp.main.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/ftp/districtnet.modules.ftp.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/ftp/districtnet.modules.ftp.test.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/ftp/districtnet.modules.ftp.test.iml" />
     </modules>
   </component>
 </project>

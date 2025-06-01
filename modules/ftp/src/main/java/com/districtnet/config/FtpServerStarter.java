@@ -11,6 +11,8 @@ import org.apache.ftpserver.usermanager.impl.WritePermission;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,12 +23,14 @@ public class FtpServerStarter implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         FtpServerFactory serverFactory = new FtpServerFactory();
+        String ftpPath = Paths.get("").toAbsolutePath() + "/ftp/data";
+        Files.createDirectories(Paths.get(ftpPath));
 
 
         BaseUser user = new BaseUser();
         user.setName("user");
         user.setPassword("password");
-        user.setHomeDirectory("/ftp/data");
+        user.setHomeDirectory(ftpPath);
 
 
         List<Authority> authorities = new ArrayList<>();

@@ -3,5 +3,5 @@ rootProject.name = 'districtnet'
 include 'modules:core'
 include 'modules:cli'
 include 'modules:api'
-include 'modules:ssh-agent'
+include 'modules:ftp'
 

@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 @Component
-@Scope
+
 public class ActiveContex {
 
     private final Map<String, NodeDisplayDto> context = new ConcurrentHashMap<>();
