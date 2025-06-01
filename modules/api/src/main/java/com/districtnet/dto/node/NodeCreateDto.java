@@ -1,10 +1,8 @@
 package com.districtnet.dto.node;
 
-import com.districtnet.Enum.Auth_type;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
-import java.util.Set;
 
 @Data
 public class NodeCreateDto {
