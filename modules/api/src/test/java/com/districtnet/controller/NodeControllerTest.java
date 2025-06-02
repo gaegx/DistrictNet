@@ -1,9 +1,9 @@
 package com.districtnet.controller;
 
 import com.districtnet.Enum.Auth_type;
-import com.districtnet.dto.NodeCreateDto;
-import com.districtnet.dto.NodeDisplayDto;
-import com.districtnet.dto.NodeViewDto;
+import com.districtnet.dto.node.NodeCreateDto;
+import com.districtnet.dto.node.NodeDisplayDto;
+import com.districtnet.dto.node.NodeViewDto;
 import com.districtnet.service.NodeService;
 import com.districtnet.mapper.NodeMapper;
 
@@ -48,10 +48,7 @@ class NodeControllerTest {
         input.setHostname("node1");
         input.setIpAddress("192.168.0.1");
         input.setOs("Linux");
-        input.setResource(Set.of("web", "db"));
-        input.setTypeAuth(Auth_type.PASSWORD);
-        input.setUserName("admin");
-        input.setAuthKey("secret1");
+
 
 
         NodeDisplayDto result = new NodeDisplayDto();
@@ -59,9 +56,7 @@ class NodeControllerTest {
         result.setHostname("node1");
         result.setIpAddress("192.168.0.1");
         result.setOs("Linux");
-        result.setResource(Set.of("web", "db"));
-        result.setRegisteredAt(Instant.now());
-        result.setLastSeen(Instant.now());
+
 
         when(nodeService.create(input)).thenReturn(result);
 
@@ -80,9 +75,7 @@ class NodeControllerTest {
         node.setHostname("node1");
         node.setIpAddress("192.168.0.1");
         node.setOs("Linux");
-        node.setResource(Set.of("web"));
-        node.setRegisteredAt(Instant.now());
-        node.setLastSeen(Instant.now());
+
 
         when(nodeService.getById(1L)).thenReturn(node);
 

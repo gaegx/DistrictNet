@@ -1,14 +1,15 @@
 package com.districtnet.mapper;
 
-import com.districtnet.dto.NodeCreateDto;
-import com.districtnet.dto.NodeDisplayDto;
-import com.districtnet.dto.NodeViewDto;
-import com.districtnet.model.Node;
+import com.districtnet.dto.node.NodeCreateDto;
+import com.districtnet.dto.node.NodeDisplayDto;
+import com.districtnet.dto.node.NodeViewDto;
+import com.districtnet.entity.Node;
 import org.springframework.stereotype.Component;
+
+import java.time.Instant;
 
 @Component
 public class NodeMapper {
-
 
     public NodeDisplayDto toDisplayDto(Node node) {
         if (node == null) {
@@ -21,11 +22,10 @@ public class NodeMapper {
         dto.setIpAddress(node.getIpAddress());
         dto.setOs(node.getOs());
         dto.setDescription(node.getDescription());
-        dto.setResource(node.getResources());
-        dto.setRegisteredAt(node.getRegisteredAt());
-        dto.setLastSeen(node.getLastSeenAt());
-
-
+        dto.setCpu(node.getCpu());
+        dto.setRam(node.getRam());
+        dto.setDisk(node.getDisk());
+        dto.setWeight((((node.getDisk()+node.getRam()+node.getCpu())/3))/100);
 
         return dto;
     }
@@ -38,33 +38,28 @@ public class NodeMapper {
         NodeViewDto dto = new NodeViewDto();
         dto.setNodeId(String.valueOf(node.getNodeId()));
         dto.setHostname(node.getHostname());
-
-
-        dto.setStatus("ACTIVE");
+        dto.setStatus("ACTIVE"); // можно сделать динамически или через enum в будущем
 
         return dto;
     }
 
-
-    public Node toEntity(NodeCreateDto nodeCreateDto) {
-        if (nodeCreateDto == null) {
+    public Node toEntity(NodeCreateDto dto) {
+        if (dto == null) {
             return null;
         }
 
         Node node = new Node();
-        node.setNodeId(nodeCreateDto.getNodeId());
-        node.setHostname(nodeCreateDto.getHostname());
-        node.setIpAddress(nodeCreateDto.getIpAddress());
-        node.setOs(nodeCreateDto.getOs());
-        node.setDescription(nodeCreateDto.getDescription());
-        node.setResources(nodeCreateDto.getResource());
-        node.setRegisteredAt(java.time.Instant.now());
-        node.setLastSeenAt(java.time.Instant.now());
-        node.setUserName(nodeCreateDto.getUserName());
-        node.setAuthKey(nodeCreateDto.getAuthKey());
-        node.setTypeAuth(nodeCreateDto.getTypeAuth());
+        node.setNodeId(dto.getNodeId());
+        node.setHostname(dto.getHostname());
+        node.setIpAddress(dto.getIpAddress());
+        node.setOs(dto.getOs());
+        node.setDescription(dto.getDescription());
+        node.setRegisteredAt(Instant.now());
+        node.setLastSeenAt(Instant.now());
 
-
+        node.setCpu(dto.getCpu() != null ? dto.getCpu() : 0f);
+        node.setRam(dto.getRam() != null ? dto.getRam() : 0f);
+        node.setDisk(dto.getDisk() != null ? dto.getDisk() : 0f);
 
         return node;
     }
