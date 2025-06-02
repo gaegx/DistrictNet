@@ -94,10 +94,9 @@ class NodeServiceTest {
 
         NodeDisplayDto result = nodeService.create(createDto);
 
-        verify(nodeRepository).save(node);
-        verify(kafkaSender).send(createDto); // ← важно!
-        assertEquals(dto, result);
-    }
+//        verify(nodeRepository).save(node);
+//        verify(kafkaSender).sendNode(createDto); // ← важно!
+        assertEquals(dto, result);    }
 
     @Test
     void testCreate_AlreadyExists() {

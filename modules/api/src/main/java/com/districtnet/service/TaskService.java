@@ -28,7 +28,7 @@ public class TaskService {
     public TaskDisplayDto createTask(TaskCreateDto dto) {
         Task task = TaskMapper.toEntity(dto);
         Task saved = taskRepository.save(task);
-        kafkaSender.send(dto);
+        kafkaSender.sendTask(dto);
         TaskDisplayDto displayDto = TaskMapper.toDisplayDto(saved);
         return displayDto;
     }

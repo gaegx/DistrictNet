@@ -1,30 +1,30 @@
 package com.districtnet.service;
 
-import com.districtnet.dto.node.NodeCreateDto;
-
 import com.districtnet.dto.node.NodeDisplayDto;
 import com.districtnet.dto.task.TaskCreateDto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
 public class KafkaSender {
 
-    private final KafkaTemplate<String, NodeDisplayDto> kafkaTemplate;
-    private final KafkaTemplate<String, TaskCreateDto> kafkaTemplate2;
+    private final KafkaTemplate<String, NodeDisplayDto> nodeKafkaTemplate;
+    private final KafkaTemplate<String, TaskCreateDto> taskKafkaTemplate;
 
-    private KafkaSender(KafkaTemplate<String, NodeDisplayDto> kafkaTemplate,KafkaTemplate<String, TaskCreateDto> kafkaTemplate2) {
-        this.kafkaTemplate = kafkaTemplate;
-        this.kafkaTemplate2 = kafkaTemplate2;
+    public KafkaSender(KafkaTemplate<String, NodeDisplayDto> nodeKafkaTemplate,
+                       KafkaTemplate<String, TaskCreateDto> taskKafkaTemplate) {
+        this.nodeKafkaTemplate = nodeKafkaTemplate;
+        this.taskKafkaTemplate = taskKafkaTemplate;
     }
 
-
-    public void send(NodeDisplayDto nodeDisplayDto) {
-        kafkaTemplate.send("node", nodeDisplayDto);
+    public void sendNode(NodeDisplayDto nodeDisplayDto) {
+        nodeKafkaTemplate.send("node", nodeDisplayDto);
     }
 
-    public void send(TaskCreateDto taskCreateDto) {
-        kafkaTemplate2.send("task", taskCreateDto);
+    public void sendTask(TaskCreateDto taskCreateDto) {
+        for (int partition = 0; partition < 2; partition++) {
+            taskKafkaTemplate.send("task", partition, null, taskCreateDto);
+        }
     }
+
 }

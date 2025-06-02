@@ -1,6 +1,6 @@
 package com.districtnet.service;
 
-import jakarta.annotation.PreDestroy;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -211,7 +211,7 @@ public class FtpService {
         return fileNames;
     }
 
-    @PreDestroy
+
     private void disconnect(FTPClient ftpClient) {
         if (ftpClient != null && ftpClient.isConnected()) {
             try {

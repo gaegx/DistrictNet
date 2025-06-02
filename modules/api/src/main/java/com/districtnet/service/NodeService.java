@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+
 public class NodeService {
     
     private final NodeRepository nodeRepository;
@@ -50,7 +51,8 @@ public class NodeService {
         }
         Node node = nodeMapper.toEntity(dto);
         nodeRepository.save(node);
-        kafkaSender.send(dto);
+        var temp = nodeMapper.toDisplayDto(node);
+        kafkaSender.sendNode(temp);
         return nodeMapper.toDisplayDto(node);
     }
 

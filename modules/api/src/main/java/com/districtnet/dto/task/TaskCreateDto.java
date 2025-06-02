@@ -1,11 +1,11 @@
 package com.districtnet.dto.task;
 
-import com.districtnet.Enum.TaskType;
+
 import jakarta.validation.constraints.*;
-import lombok.Getter;
-import lombok.Setter;
-@Getter
-@Setter
+import lombok.Data;
+
+
+@Data
 public class TaskCreateDto {
 
     @NotBlank

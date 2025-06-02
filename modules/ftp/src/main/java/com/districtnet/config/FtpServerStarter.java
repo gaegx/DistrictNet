@@ -45,7 +45,7 @@ public class FtpServerStarter implements CommandLineRunner {
         factory.setPort(2221);
         serverFactory.addListener("default", factory.createListener());
 
-        // Запуск сервера
+
         FtpServer server = serverFactory.createServer();
         server.start();
 
