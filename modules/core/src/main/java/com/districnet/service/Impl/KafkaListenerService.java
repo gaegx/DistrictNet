@@ -4,6 +4,7 @@ import com.districnet.config.ActiveContex;
 import com.districnet.dto.NodeDisplayDto;
 import com.districnet.dto.TaskCreateDto;
 
+import com.districnet.service.DataDistributorService;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +12,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class KafkaListenerService {
 
-    ActiveContex activeContex;
+    private  final ActiveContex activeContex;
+    private final DataDistributorService dataDistributorService;
 
-    public KafkaListenerService(ActiveContex activeContex) {
+
+    public KafkaListenerService(ActiveContex activeContex, DataDistributorService dataDistributorService) {
         this.activeContex = activeContex;
+        this.dataDistributorService=dataDistributorService;
 
     }
 
@@ -25,6 +29,8 @@ public class KafkaListenerService {
     )
     public void listenTask(TaskCreateDto dto) {
         System.out.println("Received TaskCreateDto from Kafka: " + dto.toString());
+        dataDistributorService.distribute(dto);
+
     }
 
     @KafkaListener(

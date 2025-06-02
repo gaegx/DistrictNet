@@ -21,8 +21,8 @@ public class NodeKafkaListenerService {
     )
     public void listen(TaskCreateDto dto) {
         System.out.println("Received DTO from Kafka: " + dto.toString());
-        ftpService.uploadFile(dto.getDockerPath(),"docker" );
-
+        ftpService.uploadFile(dto.getDataPath(), dto.getName() );
+        ftpService.uploadFile(dto.getDockerPath(), "DockerImage"+dto.getName() );
 
 
 

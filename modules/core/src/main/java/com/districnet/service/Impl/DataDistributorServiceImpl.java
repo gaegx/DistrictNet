@@ -24,7 +24,7 @@ public class DataDistributorServiceImpl implements DataDistributorService {
     private final LoadBalancerService loadBalancerService;
     private final ActiveContex activeContex;
 
-    private static final int DEFAULT_CHUNK_SIZE = 100;
+    private static final int DEFAULT_CHUNK_SIZE = 1;
 
     @Override
     public void distribute(TaskCreateDto taskCreateDto) {
