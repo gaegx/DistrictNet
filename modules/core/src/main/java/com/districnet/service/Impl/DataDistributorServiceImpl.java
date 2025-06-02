@@ -1,6 +1,5 @@
 package com.districnet.service.Impl;
 
-
 import com.districnet.config.ActiveContex;
 import com.districnet.dto.DataChunkDto;
 import com.districnet.dto.TaskCreateDto;
@@ -24,15 +23,14 @@ public class DataDistributorServiceImpl implements DataDistributorService {
     private final LoadBalancerService loadBalancerService;
     private final ActiveContex activeContex;
 
-    private static final int DEFAULT_CHUNK_SIZE = 1;
+
+    private static final int DEFAULT_CHUNK_SIZE = 16;
 
     @Override
     public void distribute(TaskCreateDto taskCreateDto) {
         try {
-
             List<DataChunkDto> chunkDtos = csvSplitterService.splitCsv(taskCreateDto.getDataPath(), DEFAULT_CHUNK_SIZE);
             log.info("Разделено {} чанков из CSV-файла {}", chunkDtos.size(), taskCreateDto.getDataPath());
-
 
             Map<String, NodeDisplayDto> activeNodes = activeContex.getAllNodes()
                     .entrySet()
@@ -45,18 +43,13 @@ public class DataDistributorServiceImpl implements DataDistributorService {
                 return;
             }
 
-
             Map<String, List<DataChunkDto>> assignments = loadBalancerService.distribute(chunkDtos, activeNodes);
-
 
             for (Map.Entry<String, List<DataChunkDto>> entry : assignments.entrySet()) {
                 String nodeId = entry.getKey();
                 NodeDisplayDto node = activeNodes.get(nodeId);
                 List<DataChunkDto> assignedChunks = entry.getValue();
-
                 log.info("Узел {} (IP: {}) получил {} чанков", node.getHostname(), node.getIpAddress(), assignedChunks.size());
-
-                // TODO: Здесь отправка файлов на узел (через FTP или HTTP)
             }
 
         } catch (Exception e) {
@@ -64,4 +57,3 @@ public class DataDistributorServiceImpl implements DataDistributorService {
         }
     }
 }
-

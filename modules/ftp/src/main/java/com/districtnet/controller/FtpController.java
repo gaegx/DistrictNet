@@ -19,76 +19,60 @@ public class FtpController {
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file,
-                                             @RequestParam("remotePath") String remotePath) {
-        try {
-            File tempFile = File.createTempFile("upload_", "_" + file.getOriginalFilename());
-            file.transferTo(tempFile);
+                                             @RequestParam("remotePath") String remotePath) throws IOException {
+        File tempFile = File.createTempFile("upload", file.getOriginalFilename());
+        file.transferTo(tempFile);
 
-            boolean success = ftpService.uploadFile(tempFile.getAbsolutePath(), remotePath);
-            tempFile.delete();
+        boolean success = ftpService.uploadFile(tempFile.getAbsolutePath(), remotePath);
+        tempFile.delete();
 
-            return success
-                    ? ResponseEntity.ok("Файл загружен на FTP.")
-                    : ResponseEntity.status(500).body("Ошибка загрузки файла.");
-        } catch (IOException e) {
-            return ResponseEntity.status(500).body("Ошибка: " + e.getMessage());
-        }
+        return success ? ResponseEntity.ok("Файл загружен") : ResponseEntity.badRequest().body("Ошибка загрузки");
     }
 
     @PostMapping("/upload-dir")
-    public ResponseEntity<String> uploadDirectory(@RequestParam("localDir") String localDir,
-                                                  @RequestParam("remoteDir") String remoteDir) {
-        boolean success = ftpService.uploadDirectory(localDir, remoteDir);
-        return success
-                ? ResponseEntity.ok("Директория загружена.")
-                : ResponseEntity.status(500).body("Ошибка загрузки директории.");
+    public ResponseEntity<String> uploadDirectory(@RequestParam String localDirPath,
+                                                  @RequestParam String remoteDirPath) {
+        boolean success = ftpService.uploadDirectory(localDirPath, remoteDirPath);
+        return success ? ResponseEntity.ok("Каталог загружен") : ResponseEntity.badRequest().body("Ошибка загрузки каталога");
     }
 
     @GetMapping("/download")
-    public ResponseEntity<String> downloadFile(@RequestParam("remotePath") String remotePath,
-                                               @RequestParam("localPath") String localPath) {
-        boolean success = ftpService.downloadFile(remotePath, localPath);
-        return success
-                ? ResponseEntity.ok("Файл загружен с FTP.")
-                : ResponseEntity.status(500).body("Ошибка скачивания файла.");
+    public ResponseEntity<String> downloadFile(@RequestParam String remoteFilePath,
+                                               @RequestParam String localFilePath) {
+        boolean success = ftpService.downloadFile(remoteFilePath, localFilePath);
+        return success ? ResponseEntity.ok("Файл скачан") : ResponseEntity.badRequest().body("Ошибка загрузки");
     }
 
     @GetMapping("/download-dir")
-    public ResponseEntity<String> downloadDirectory(@RequestParam("remoteDir") String remoteDir,
-                                                    @RequestParam("localDir") String localDir) {
-        boolean success = ftpService.downloadDirectory(remoteDir, localDir);
-        return success
-                ? ResponseEntity.ok("Директория загружена.")
-                : ResponseEntity.status(500).body("Ошибка скачивания директории.");
-    }
-
-    @PostMapping("/mkdir")
-    public ResponseEntity<String> createDirectory(@RequestParam("remoteDir") String remoteDir) {
-        boolean success = ftpService.makeDirectory(remoteDir);
-        return success
-                ? ResponseEntity.ok("Директория создана.")
-                : ResponseEntity.status(500).body("Ошибка создания директории.");
-    }
-
-    @DeleteMapping("/file")
-    public ResponseEntity<String> deleteFile(@RequestParam("remoteFile") String remoteFile) {
-        boolean success = ftpService.deleteFile(remoteFile);
-        return success
-                ? ResponseEntity.ok("Файл удалён.")
-                : ResponseEntity.status(500).body("Ошибка удаления файла.");
-    }
-
-    @DeleteMapping("/dir")
-    public ResponseEntity<String> deleteDirectory(@RequestParam("remoteDir") String remoteDir) {
-        boolean success = ftpService.removeDirectory(remoteDir);
-        return success
-                ? ResponseEntity.ok("Директория удалена.")
-                : ResponseEntity.status(500).body("Ошибка удаления директории.");
+    public ResponseEntity<String> downloadDirectory(@RequestParam String remoteDirPath,
+                                                    @RequestParam String localDirPath) {
+        boolean success = ftpService.downloadDirectory(remoteDirPath, localDirPath);
+        return success ? ResponseEntity.ok("Каталог скачан") : ResponseEntity.badRequest().body("Ошибка загрузки каталога");
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<String>> listFiles(@RequestParam("remoteDir") String remoteDir) {
-        List<String> files = ftpService.listFiles(remoteDir);
-        return ResponseEntity.ok(files);
+    public ResponseEntity<List<String>> listFiles(@RequestParam String remoteDirPath) {
+        return ResponseEntity.ok(ftpService.listFiles(remoteDirPath));
+    }
+
+    @PostMapping("/mkdir")
+    public ResponseEntity<String> makeDir(@RequestParam String remoteDirPath) {
+        return ftpService.makeDirectory(remoteDirPath)
+                ? ResponseEntity.ok("Директория создана")
+                : ResponseEntity.badRequest().body("Ошибка создания директории");
+    }
+
+    @DeleteMapping("/delete-file")
+    public ResponseEntity<String> deleteFile(@RequestParam String remoteFilePath) {
+        return ftpService.deleteFile(remoteFilePath)
+                ? ResponseEntity.ok("Файл удален")
+                : ResponseEntity.badRequest().body("Ошибка удаления файла");
+    }
+
+    @DeleteMapping("/delete-dir")
+    public ResponseEntity<String> removeDir(@RequestParam String remoteDirPath) {
+        return ftpService.removeDirectory(remoteDirPath)
+                ? ResponseEntity.ok("Директория удалена")
+                : ResponseEntity.badRequest().body("Ошибка удаления директории");
     }
 }
