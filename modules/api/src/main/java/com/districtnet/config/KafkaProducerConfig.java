@@ -2,6 +2,7 @@ package com.districtnet.config;
 
 
 import com.districtnet.dto.node.NodeCreateDto;
+import com.districtnet.dto.node.NodeDisplayDto;
 import com.districtnet.dto.task.TaskCreateDto;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -23,7 +24,7 @@ public class KafkaProducerConfig {
     private String bootstrapAddress;
 
     @Bean
-    public ProducerFactory<String, NodeCreateDto> NodeproducerFactory() {
+    public ProducerFactory<String, NodeDisplayDto> NodeproducerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -43,7 +44,7 @@ public class KafkaProducerConfig {
 
 
     @Bean
-    public KafkaTemplate<String, NodeCreateDto> NodekafkaTemplate() {
+    public KafkaTemplate<String, NodeDisplayDto> NodekafkaTemplate() {
         return new KafkaTemplate<>(NodeproducerFactory());
     }
 

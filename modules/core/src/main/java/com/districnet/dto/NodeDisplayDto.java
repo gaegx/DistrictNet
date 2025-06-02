@@ -1,9 +1,6 @@
-package com.districtnet.dto.node;
+package com.districnet.dto;
 
 import lombok.Data;
-
-import java.time.Instant;
-import java.util.Set;
 
 @Data
 public class NodeDisplayDto {

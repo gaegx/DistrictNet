@@ -48,10 +48,7 @@ class NodeControllerTest {
         input.setHostname("node1");
         input.setIpAddress("192.168.0.1");
         input.setOs("Linux");
-        input.setResource(Set.of("web", "db"));
-        input.setTypeAuth(Auth_type.PASSWORD);
-        input.setUserName("admin");
-        input.setAuthKey("secret1");
+
 
 
         NodeDisplayDto result = new NodeDisplayDto();

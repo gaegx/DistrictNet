@@ -22,11 +22,10 @@ public class NodeMapper {
         dto.setIpAddress(node.getIpAddress());
         dto.setOs(node.getOs());
         dto.setDescription(node.getDescription());
-        dto.setRegisteredAt(node.getRegisteredAt());
-        dto.setLastSeen(node.getLastSeenAt());
         dto.setCpu(node.getCpu());
         dto.setRam(node.getRam());
         dto.setDisk(node.getDisk());
+        dto.setWeight((((node.getDisk()+node.getRam()+node.getCpu())/3))/100);
 
         return dto;
     }

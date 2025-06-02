@@ -1,15 +1,15 @@
-package com.districtnet.config;
+package com.districnet.config;
 
 
-import com.districtnet.dto.node.NodeDisplayDto;
-import org.springframework.context.annotation.Scope;
+
+import com.districnet.dto.NodeDisplayDto;
 import org.springframework.stereotype.Component;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 
 @Component
-
 public class ActiveContex {
 
     private final Map<String, NodeDisplayDto> context = new ConcurrentHashMap<>();
