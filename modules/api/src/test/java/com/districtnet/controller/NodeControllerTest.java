@@ -56,9 +56,7 @@ class NodeControllerTest {
         result.setHostname("node1");
         result.setIpAddress("192.168.0.1");
         result.setOs("Linux");
-        result.setResource(Set.of("web", "db"));
-        result.setRegisteredAt(Instant.now());
-        result.setLastSeen(Instant.now());
+
 
         when(nodeService.create(input)).thenReturn(result);
 
@@ -77,9 +75,7 @@ class NodeControllerTest {
         node.setHostname("node1");
         node.setIpAddress("192.168.0.1");
         node.setOs("Linux");
-        node.setResource(Set.of("web"));
-        node.setRegisteredAt(Instant.now());
-        node.setLastSeen(Instant.now());
+
 
         when(nodeService.getById(1L)).thenReturn(node);
 
