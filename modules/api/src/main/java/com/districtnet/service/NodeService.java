@@ -1,10 +1,10 @@
 package com.districtnet.service;
 
-import com.districtnet.dto.NodeCreateDto;
-import com.districtnet.dto.NodeDisplayDto;
-import com.districtnet.dto.NodeViewDto;
+import com.districtnet.dto.node.NodeCreateDto;
+import com.districtnet.dto.node.NodeDisplayDto;
+import com.districtnet.dto.node.NodeViewDto;
 import com.districtnet.mapper.NodeMapper;
-import com.districtnet.model.Node;
+import com.districtnet.entity.Node;
 import com.districtnet.repository.NodeRepository;
 import jakarta.transaction.Transactional;
 
@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+
 public class NodeService {
     
     private final NodeRepository nodeRepository;
@@ -48,12 +49,10 @@ public class NodeService {
         if (existingNode != null) {
             throw new RuntimeException("Node with hostname already exists: " + dto.getHostname());
         }
-
-
         Node node = nodeMapper.toEntity(dto);
         nodeRepository.save(node);
-        kafkaSender.send(dto);
-
+        var temp = nodeMapper.toDisplayDto(node);
+        kafkaSender.sendNode(temp);
         return nodeMapper.toDisplayDto(node);
     }
 

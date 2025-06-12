@@ -14,8 +14,7 @@
             <option value="$PROJECT_DIR$/modules/api" />
             <option value="$PROJECT_DIR$/modules/cli" />
             <option value="$PROJECT_DIR$/modules/core" />
-            <option value="$PROJECT_DIR$/modules/node" />
-            <option value="$PROJECT_DIR$/modules/ssh-agent" />
+            <option value="$PROJECT_DIR$/modules/ftp" />
           </set>
         </option>
       </GradleProjectSettings>

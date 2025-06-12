@@ -12,5 +12,14 @@ public class KafkaTopic {
     public NewTopic topic1() {
         return TopicBuilder.name("node").build();
     }
+    @Bean
+    public NewTopic taskTopic() {
+        return TopicBuilder.name("task")
+                .partitions(2)
+                .replicas(1)
+                .build();
+    }
+
+
 
 }

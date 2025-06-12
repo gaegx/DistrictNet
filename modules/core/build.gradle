@@ -2,38 +2,59 @@ plugins {
     id 'org.springframework.boot' version '3.2.0'
     id 'io.spring.dependency-management' version '1.1.4'
     id 'java'
-}
-sourceSets {
-    main {
-        java {
-            srcDirs = ['src']
-        }
-    }
+    id 'jacoco'
 }
 
-
-group = 'gaegxh' 
+group = 'gaegxh.client'
 version = '0.0.1-SNAPSHOT'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 }
-springBoot {
-    mainClass = 'com.api.ApiApplication'
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
+    }
 }
 
+springBoot {
+    mainClass = 'com.districtnet.CoreApplication'
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.postgresql:postgresql'
-    
+    implementation 'org.projectlombok:lombok:1.18.30'
+    implementation 'io.github.cdimascio:dotenv-java:2.2.0'
+    implementation 'org.springframework.kafka:spring-kafka'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.14'
+    implementation 'org.apache.httpcomponents:httpmime:4.5.14'
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+
+
+
+
+}
+
+
+tasks.named('test') {
+    useJUnitPlatform()
 }

@@ -1,7 +1,7 @@
 package com.districtnet.config;
 
-
-import com.districtnet.dto.NodeCreateDto;
+import com.districtnet.dto.node.NodeDisplayDto;
+import com.districtnet.dto.task.TaskCreateDto;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,18 +21,31 @@ public class KafkaProducerConfig {
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapAddress;
 
-    @Bean
-    public ProducerFactory<String, NodeCreateDto> producerFactory() {
-        Map<String, Object> configProps = new HashMap<>();
-        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
-        configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-        return new DefaultKafkaProducerFactory<>(configProps);
+    private Map<String, Object> producerConfigs() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        return props;
     }
 
+    @Bean
+    public ProducerFactory<String, NodeDisplayDto> nodeProducerFactory() {
+        return new DefaultKafkaProducerFactory<>(producerConfigs());
+    }
 
     @Bean
-    public KafkaTemplate<String, NodeCreateDto> kafkaTemplate() {
-        return new KafkaTemplate<>(producerFactory());
+    public KafkaTemplate<String, NodeDisplayDto> nodeKafkaTemplate() {
+        return new KafkaTemplate<>(nodeProducerFactory());
+    }
+
+    @Bean
+    public ProducerFactory<String, TaskCreateDto> taskProducerFactory() {
+        return new DefaultKafkaProducerFactory<>(producerConfigs());
+    }
+
+    @Bean
+    public KafkaTemplate<String, TaskCreateDto> taskKafkaTemplate() {
+        return new KafkaTemplate<>(taskProducerFactory());
     }
 }
